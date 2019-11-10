@@ -10,20 +10,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class DimstackClient {
 
-	/*
-	@SubscribeEvent
-	public void onItemTooltipEvent(ItemTooltipEvent event) {
-		if (DimstackMod.config.doTooltips()) for (PlayerTransmit t : DimstackMod.config.emitters) {
-			if (t.keyCached != null && t.keyCached == event.getItemStack().getItem() && t.keyMeta == event.getItemStack().getMetadata()) {
-				TextFormatting f = DimstackMod.getTextColour(t, event.getEntityPlayer());
-				event.getToolTip().add(f + DimstackMod.lang(DimstackMod.MODID + ".tooltip") + " [" + t.from + "," + t.to + "]");
-				if (event.getFlags().isAdvanced()) {
-					event.getToolTip().add(t.toString());
-				}
-			}
-		}
-	}*/
-
 	@SubscribeEvent
 	public void models(ModelRegistryEvent e) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(DimstackMod.PORTAL), 0, new ModelResourceLocation(DimstackMod.PORTAL.getRegistryName(), "normal"));

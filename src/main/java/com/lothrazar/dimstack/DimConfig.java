@@ -73,9 +73,13 @@ public class DimConfig {
 				DimstackMod.logger.error("Invalid key color entry {} will be ignored", s);
 				continue;
 			}
-			int meta = Integer.parseInt(split[0]);
-			int color = Integer.parseInt(split[1].contains("0x") ? split[1].substring(2) : split[1], split[1].contains("0x") ? 16 : 10);
-			dimKeyColors.put(meta, color);
+			try {
+				int meta = Integer.parseInt(split[0]);
+				int color = Integer.parseInt(split[1].contains("0x") ? split[1].substring(2) : split[1], split[1].contains("0x") ? 16 : 10);
+				dimKeyColors.put(meta, color);
+			} catch (NumberFormatException e) {
+				DimstackMod.logger.error("Invalid key color entry {} will be ignored", s);
+			}
 		}
 
 		String[] dimColors = config.getStringList("Portal Colors", "cosmetic", new String[] { "0:0xFF0000:0x0000F0", "1:0x00FF00:0xF00000", "-1:0x0000FF:0x000F00" }, "Portal colors per dimension.  Uses hex integers.  Format is dimension:bottom color:top color");
@@ -87,11 +91,15 @@ public class DimConfig {
 				continue;
 			}
 
-			int meta = Integer.parseInt(split[0]);
-			int color = Integer.parseInt(split[1].contains("0x") ? split[1].substring(2) : split[1], split[1].contains("0x") ? 16 : 10);
-			int color2 = Integer.parseInt(split[2].contains("0x") ? split[2].substring(2) : split[2], split[2].contains("0x") ? 16 : 10);
+			try {
+				int meta = Integer.parseInt(split[0]);
+				int color = Integer.parseInt(split[1].contains("0x") ? split[1].substring(2) : split[1], split[1].contains("0x") ? 16 : 10);
+				int color2 = Integer.parseInt(split[2].contains("0x") ? split[2].substring(2) : split[2], split[2].contains("0x") ? 16 : 10);
 
-			dimPortalColors.put(meta, new int[] { color, color2 });
+				dimPortalColors.put(meta, new int[] { color, color2 });
+			} catch (NumberFormatException e) {
+				DimstackMod.logger.error("Invalid portal color entry {} will be ignored", s);
+			}
 		}
 
 		config.save();
